@@ -2,7 +2,7 @@ import http from 'http';
 import { expect } from 'chai';
 import { Server } from 'socket.io';
 import express from 'express';
-import io from 'socket.io-client'; // Import socket.io-client
+import io from 'socket.io-client'; 
 
 const app = express();
 
@@ -13,14 +13,19 @@ describe('PDF Summarizer API', () => {
 
   before((done) => {
     server = http.createServer(app);
-    sio = new Server(server);
+    sio = new Server(server, {
+      cors: {
+        origin: 'http://localhost:5173', 
+        methods: ['GET', 'POST'],
+      },
+    });
 
     server.listen(5001, () => {
       console.log('Test server running on port 5001');
-      clientSocket = io('http://localhost:5001'); // Use imported socketClient
+      clientSocket = io('http://localhost:5001'); 
       clientSocket.on('connect', () => {
         console.log('Client connected');
-        done(); // Call done when connected
+        done(); 
       });
     });
   });
@@ -33,7 +38,7 @@ describe('PDF Summarizer API', () => {
 
   describe('Socket.IO Events', () => {
     it('should summarize PDF content with both models', function (done) {
-      this.timeout(10000); // Increase timeout to 10000ms
+      this.timeout(100000); 
 
       const mockPdfBuffer = Buffer.from('Mock PDF content for testing.');
 
@@ -43,43 +48,43 @@ describe('PDF Summarizer API', () => {
       clientSocket.emit('upload_pdf', mockPdfBuffer);
 
       clientSocket.on('summary1', (summary1) => {
-        console.log('Received summary1:', summary1); // Debug log
-        expect(summary1).to.exist; // Replace with specific assertions
-        receivedSummary1 = true; // Flag that summary1 was received
+        console.log('Received summary1:', summary1); 
+        expect(summary1).to.exist; 
+        receivedSummary1 = true; 
       });
 
       clientSocket.on('summary2', (summary2) => {
-        console.log('Received summary2:', summary2); // Debug log
-        expect(summary2).to.exist; // Replace with specific assertions
-        receivedSummary2 = true; // Flag that summary2 was received
+        console.log('Received summary2:', summary2); 
+        expect(summary2).to.exist; 
+        receivedSummary2 = true; 
       });
 
-      // Check if both summaries are received
+      
       const checkCompletion = setInterval(() => {
         if (receivedSummary1 && receivedSummary2) {
           clearInterval(checkCompletion);
           clientSocket.emit('disconnect');
           done();
         }
-      }, 100); // Check every 100ms
+      }, 100);
 
-      // Set a timeout to ensure the test fails if not completed
+      
       setTimeout(() => {
         if (!receivedSummary1 || !receivedSummary2) {
           clearInterval(checkCompletion);
           clientSocket.emit('disconnect');
           done(new Error('Test timed out waiting for summaries.'));
         }
-      }, 10000); // 10 seconds timeout
+      }, 10000); 
     });
 
     it('should handle errors when processing PDF', function (done) {
-      this.timeout(10000); // Increase timeout to 10000ms
+      this.timeout(10000); 
 
       clientSocket.emit('upload_pdf', null);
 
       clientSocket.on('error', (error) => {
-        console.log('Error received:', error); // Debug log
+        console.log('Error received:', error); 
         expect(error).to.equal('Error processing the PDF file');
         done();
       });
