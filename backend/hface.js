@@ -1,6 +1,8 @@
 import { HfInference } from '@huggingface/inference'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const hf = new HfInference('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')
+const hf = new HfInference(process.env.HUGGINGFACE_API_KEY)
 
 const hface_summarize = async (text) => {
     try {
