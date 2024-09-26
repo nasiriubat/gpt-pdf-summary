@@ -37,8 +37,7 @@ io.on('connection', (socket) => {
         hface_summarize(pdfText),
         gemini_summarize(pdfText),
       ]);
-      console.log('Summaries:', summary1, summary2);
-      // Emit summaries back to the client
+      // console.log('Summaries:', summary1, summary2);
       socket.emit('summary1', summary1);
       socket.emit('summary2', summary2);
     } catch (error) {

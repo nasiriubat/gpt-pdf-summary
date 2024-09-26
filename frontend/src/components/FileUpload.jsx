@@ -41,11 +41,15 @@ const FileUpload = () => {
       <div className="chat-box">
         <div>
           <h2>Model 1 Summary: <span className='model-name'>(facebook/bart-large-cnn)</span> </h2>
-          <p>{loading ? 'Loading...' : summary1}</p>
+          
+          {loading ?  <div className="parentloader"><div className="loader"></div>
+            <p>Generating Summary...</p></div> : summary1}
         </div>
         <div>
           <h2>Model 2 Summary: <span className='model-name'>(gemini-1.5-flash)</span></h2>
-          <p>{summary2}</p>
+
+          {loading ?  <div className="parentloader"><div className="loader"></div>
+            <p>Generating Summary...</p></div> : summary2}
         </div>
       </div>
     </div>
