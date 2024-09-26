@@ -6,8 +6,16 @@
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm run dev",
     "start": "npm-run-all --parallel start:backend start:frontend",
-   "install:all": "npm install && npm-run-all --parallel install:backend install:frontend",
+    "install:all": "npm install && npm-run-all --parallel install:backend install:frontend",
     "install:backend": "cd backend && npm install",
-    "install:frontend": "cd frontend && npm install"
-  }
+    "install:frontend": "cd frontend && npm install",
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && npm start",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
