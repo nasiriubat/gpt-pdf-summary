@@ -4,8 +4,9 @@ import {Server } from 'socket.io';
 import cors from 'cors';
 import PdfParse from 'pdf-parse/lib/pdf-parse.js';
 import multer from 'multer';
-import openai_summarize from './openai.js';
+// import openai_summarize from './openai.js';
 import hface_summarize from './hface.js';
+import gemini_summarize from './gemini.js';
 
 
 const app = express();
@@ -32,10 +33,11 @@ io.on('connection', (socket) => {
       
      
       const [summary1, summary2] = await Promise.all([
-        openai_summarize(pdfText),
-        hface_summarize(pdfText)
+        // openai_summarize(pdfText),
+        hface_summarize(pdfText),
+        gemini_summarize(pdfText),
       ]);
-      
+      console.log('Summaries:', summary1, summary2);
       // Emit summaries back to the client
       socket.emit('summary1', summary1);
       socket.emit('summary2', summary2);

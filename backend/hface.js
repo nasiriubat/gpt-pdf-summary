@@ -8,7 +8,7 @@ const hface_summarize = async (text) => {
     try {
         const response = await hf.summarization({
             model: 'facebook/bart-large-cnn',
-            inputs: text,
+            inputs: `Summarize the following text:\n\n${text}`,
             parameters: {
                 max_length: 100
             }

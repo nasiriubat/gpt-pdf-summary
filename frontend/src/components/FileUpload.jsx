@@ -25,7 +25,7 @@ const FileUpload = () => {
   };
 
   socket.on('summary1', (data) => {
-    setSummary1(data);
+    setSummary1(data.summary_text);
     setLoading(false);
   });
 
@@ -35,14 +35,16 @@ const FileUpload = () => {
 
   return (
     <div>
+      <div className="input">
       <input type="file" accept="application/pdf" onChange={handleFileUpload} />
+      </div>
       <div className="chat-box">
         <div>
-          <h2>Model 1 Summary:</h2>
+          <h2>Model 1 Summary: <span className='model-name'>(facebook/bart-large-cnn)</span> </h2>
           <p>{loading ? 'Loading...' : summary1}</p>
         </div>
         <div>
-          <h2>Model 2 Summary:</h2>
+          <h2>Model 2 Summary: <span className='model-name'>(gemini-1.5-flash)</span></h2>
           <p>{summary2}</p>
         </div>
       </div>
