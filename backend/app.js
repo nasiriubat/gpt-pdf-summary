@@ -14,9 +14,9 @@ const server = http.createServer(app);
 // const io = new Server (server); 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: 'https://gpt-pdf-summary-frontend.onrender.com',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Access-Control-Allow-Origin: localhost:5173'],
+    allowedHeaders: ['Access-Control-Allow-Origin: gpt-pdf-summary-frontend.onrender.com'],
   },
 });
 
