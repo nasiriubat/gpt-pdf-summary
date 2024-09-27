@@ -112,6 +112,18 @@ main {
   overflow-y: auto;
 }
 
+.chat-box  div p{
+  font-size: 1.2rem;
+  font-family:Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  text-align: justify;
+}
+.copyicon{
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+}
+
 .chat-box h2 {
   margin-top: 0;
   font-size: 1.5rem;
