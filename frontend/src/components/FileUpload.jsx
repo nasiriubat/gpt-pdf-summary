@@ -33,6 +33,15 @@ const FileUpload = () => {
     setSummary2(data);
   });
 
+  const copySummaryOne = () => {
+    const summaryText = document.querySelector('.summary1').innerText;
+    navigator.clipboard.writeText(summaryText);
+  };
+  const copySummaryTwo = () => {
+    const summaryText = document.querySelector('.summary2').innerText;
+    navigator.clipboard.writeText(summaryText);
+  };
+
   return (
     <div>
       <div className="input">
@@ -40,16 +49,16 @@ const FileUpload = () => {
       </div>
       <div className="chat-box">
         <div>
-          <h2>Model 1 Summary: <span className='model-name'>(facebook/bart-large-cnn)</span> </h2>
+          <h2>Model 1 Summary: <span className='model-name'>(facebook/bart-large-cnn)</span> <img className='copyicon' onClick={copySummaryOne} src="./copy.png" alt="copy" /></h2>
           
           {loading ?  <div className="parentloader"><div className="loader"></div>
-            <p>Generating Summary...</p></div> : summary1}
+            <p>Generating Summary...</p></div> : <p className='summary1'> {summary1}</p>}
         </div>
         <div>
-          <h2>Model 2 Summary: <span className='model-name'>(gemini-1.5-flash)</span></h2>
+          <h2>Model 2 Summary: <span className='model-name'>(gemini-1.5-flash)</span> <img className='copyicon' onClick={copySummaryTwo} src="./copy.png" alt="copy" /></h2>
 
           {loading ?  <div className="parentloader"><div className="loader"></div>
-            <p>Generating Summary...</p></div> : summary2}
+            <p>Generating Summary...</p></div> : <p className='summary2'>{summary2}</p>}
         </div>
       </div>
     </div>
@@ -57,3 +66,4 @@ const FileUpload = () => {
 };
 
 export default FileUpload;
+
