@@ -38,7 +38,7 @@ const FileUpload = () => {
     navigator.clipboard.writeText(summaryText);
   };
   const copySummaryTwo = () => {
-    const summaryText = document.querySelector('.summary1').innerText;
+    const summaryText = document.querySelector('.summary2').innerText;
     navigator.clipboard.writeText(summaryText);
   };
 
